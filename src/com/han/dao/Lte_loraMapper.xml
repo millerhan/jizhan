@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.han.dao.Lte_loraDao">
+	
+	<sql id="select">
+		SELECT * FROM `lte_lora` 
+	</sql>
+	
+	<sql id="order">
+		ORDER BY `time` DESC
+	</sql>
+	
+	<sql id="limit">
+		limit #{start},#{size}
+	</sql>
+	
+	<select id="selectRecords" resultType="int">
+		SELECT count(1) FROM `lte_lora` 
+	</select>
+
+	<select id="selectAll" resultType="Lte_lora">
+		 <include refid="select"></include>
+		 <include refid="order"></include>
+	</select>
+	<select id="selectByPage" resultType="Lte_lora">
+		 <include refid="select"></include>
+		 <include refid="order"></include>
+		 <include refid="limit"></include>
+	</select>
+	
+	<insert id="addTestData" parameterType="list">
+		insert into lte_lora values
+		<foreach collection="list" item="s" separator=",">
+			(default,#{s.car_id},#{s.lora_id},now())
+		</foreach>
+	</insert>
+</mapper>

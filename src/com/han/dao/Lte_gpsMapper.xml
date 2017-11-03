@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.han.dao.Lte_gpsDao">
+	
+	<sql id="select">
+		SELECT * FROM `lte_gps` 
+	</sql>
+		<sql id="order">
+		ORDER BY `time` DESC
+	</sql>
+	
+	<select id="selectGps" parameterType="int" resultType="Lte_gps">
+		<include refid="select"></include>
+		WHERE car_id=#{car_id} 
+		<include refid="order"></include>
+		limit 1
+	</select>
+	<insert id="addTestData" parameterType="list">
+		insert into lte_gps values
+		<foreach collection="list" item="g" separator=",">
+			(default,
+        #{g.car_id},
+        #{g.gps_year},
+        #{g.gps_month},
+        #{g.gps_day},
+        #{g.gps_hour},
+        #{g.gps_miniute},
+        #{g.gps_second},
+        #{g.gps_latitude},
+        #{g.gps_longitude},
+        now())
+		</foreach>
+	</insert>
+	
+</mapper>
