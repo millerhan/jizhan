@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.han.service.LteService;
 import com.han.vo.Lte_gps;
 
+/**
+ * 
+ * @author º«ÉÙ±ó
+ *
+ */
 @Controller
 public class GpsController {
 
